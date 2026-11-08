@@ -30,11 +30,28 @@ for line in sections["Proxy Group"]:
     name, options = line.split(" = ", 1)
     options = options.split(",")
     choices = [option for option in options[1:] if "=" not in option]
+    if options[0] == "url-test":
+        parameters = dict(option.split("=", 1) for option in options[1:] if "=" in option)
+        group = {
+            "name": name,
+            "type": "url-test",
+            "use": ["subscription"],
+            "url": parameters["url"],
+            "interval": int(parameters["interval"]),
+            "tolerance": int(parameters.get("tolerance", 0)),
+            "timeout": int(parameters.get("timeout", 5)) * 1000,
+            "lazy": False,
+            "filter": parameters.get("policy-regex-filter", ".+"),
+        }
+        groups.append(group)
+        continue
+    if options[0] != "select":
+        raise ValueError(f"Unsupported source group type: {options[0]}")
     selected = next((o.split("=", 1)[1] for o in options if o.startswith("policy-select-name=")), choices[0])
     choices.remove(selected)
     choices.insert(0, selected)
     group = {"name": name, "type": options[0], "proxies": choices}
-    if name == "🚀 节点选择":
+    if name == "✋ 手动选择":
         group["use"] = ["subscription"]
     groups.append(group)
 
@@ -123,7 +140,8 @@ report = {
     "source_types": dict(source_types),
     "changes": changes,
     "config_level_changes": [
-        "All 13 source groups retain their choices and defaults; PROXY is a separate subscription selector, also available directly in 节点选择.",
+        f"All {len(groups) - 1} source groups are converted; select groups retain their choices and defaults. PROXY is a separate subscription selector, also available through 手动选择.",
+        "Source url-test groups test subscription nodes; timeout seconds become milliseconds, and lazy=false enables periodic checks even when idle.",
         "All source routing rules retain their order; PROTOCOL becomes NETWORK, FINAL becomes MATCH, and source providers map to Mihomo providers.",
         "All eight owned rulesets are converted locally and served from yzfh-ty/Clash-Rules.",
         "The existing dm.wo.com.cn rejection and Xiaohongshu DNS policy are retained.",

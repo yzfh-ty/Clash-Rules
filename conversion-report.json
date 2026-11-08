@@ -1,7 +1,7 @@
 {
   "target": "Mihomo (Clash.Meta)",
   "source": "yzfh-ty/Shadowrocket-Rules",
-  "source_config_sha256": "20faf0d0f8452ae272e6f67c7fb0f8b29b74a2ebe402e537e46e0d80b08a448e",
+  "source_config_sha256": "a6794b7c859d4c64ec700ec18569c91b0878c82404a2052db2e55be45d33b1e1",
   "source_files_sha256": {
     "Mail.list": "7e2096e5314583990cb7052acdfe6572747fc586c9f05d5144e76ec011f10c2e",
     "Google.list": "b4a272c15a054353873817785367379bbaa1359efd276aa82a16186f29e5d493",
@@ -190,7 +190,8 @@
     }
   ],
   "config_level_changes": [
-    "All 13 source groups retain their choices and defaults; PROXY is a separate subscription selector, also available directly in 节点选择.",
+    "All 15 source groups are converted; select groups retain their choices and defaults. PROXY is a separate subscription selector, also available through 手动选择.",
+    "Source url-test groups test subscription nodes; timeout seconds become milliseconds, and lazy=false enables periodic checks even when idle.",
     "All source routing rules retain their order; PROTOCOL becomes NETWORK, FINAL becomes MATCH, and source providers map to Mihomo providers.",
     "All eight owned rulesets are converted locally and served from yzfh-ty/Clash-Rules.",
     "The existing dm.wo.com.cn rejection and Xiaohongshu DNS policy are retained.",

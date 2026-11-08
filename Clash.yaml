@@ -95,6 +95,7 @@ proxy-providers:
     interval: 86400
     health-check:
       enable: true
+      lazy: false
       url: https://www.gstatic.com/generate_204
       interval: 600
       timeout: 5000
@@ -108,11 +109,26 @@ proxy-groups:
 - name: 🚀 节点选择
   type: select
   proxies:
-  - PROXY
+  - ✋ 手动选择
+  - ⚡ 自动选择
   - DIRECT
   - REJECT
+- name: ✋ 手动选择
+  type: select
+  proxies:
+  - PROXY
   use:
   - subscription
+- name: ⚡ 自动选择
+  type: url-test
+  use:
+  - subscription
+  url: https://www.gstatic.com/generate_204
+  interval: 600
+  tolerance: 0
+  timeout: 5000
+  lazy: false
+  filter: .+
 - name: 🧱 DNS 防泄露
   type: select
   proxies:
@@ -185,6 +201,7 @@ proxy-groups:
   proxies:
   - PROXY
   - 🚀 节点选择
+  - ⚡ 自动选择
   - DIRECT
   - REJECT
 - name: 🐟 漏网之鱼
@@ -192,6 +209,7 @@ proxy-groups:
   proxies:
   - PROXY
   - 🚀 节点选择
+  - ⚡ 自动选择
   - DIRECT
   - REJECT
 rule-providers:
