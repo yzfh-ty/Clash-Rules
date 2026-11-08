@@ -1,4 +1,4 @@
-# Generated from HK_Banks_Direct.list; do not edit by hand.
+# Generated from HK_Banks_Direct.list by scripts/sync-shadowrocket.py.
 payload:
   - 'DOMAIN,www.sc.com'
   - 'DOMAIN,api.sc.com'

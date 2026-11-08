@@ -1,0 +1,16 @@
+# Generated from Mail.list by scripts/sync-shadowrocket.py.
+payload:
+  - 'DOMAIN,imap.gmail.com'
+  - 'DOMAIN,pop.gmail.com'
+  - 'DOMAIN,smtp.gmail.com'
+  - 'DOMAIN,imap-mail.outlook.com'
+  - 'DOMAIN,outlook.office365.com'
+  - 'DOMAIN,smtp-mail.outlook.com'
+  - 'DOMAIN,smtp.office365.com'
+  - 'DOMAIN,imap.mail.yahoo.com'
+  - 'DOMAIN,smtp.mail.yahoo.com'
+  - 'DOMAIN,apple.imap.mail.yahoo.com'
+  - 'DOMAIN,apple.smtp.mail.yahoo.com'
+  - 'DOMAIN,imap.yandex.com'
+  - 'DOMAIN,pop.yandex.com'
+  - 'DOMAIN,smtp.yandex.com'

@@ -1,5 +1,7 @@
-# Generated from Apple.list; do not edit by hand.
+# Generated from Apple.list by scripts/sync-shadowrocket.py.
 payload:
+  - 'DOMAIN-SUFFIX,mail.icloud.com.cn'
+  - 'DOMAIN-SUFFIX,mail.me.com'
   - 'DOMAIN-SUFFIX,apple.com'
   - 'DOMAIN-SUFFIX,icloud.com'
   - 'DOMAIN-SUFFIX,icloud-content.com'

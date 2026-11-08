@@ -1,188 +1,205 @@
 {
   "target": "Mihomo (Clash.Meta)",
-  "source_rules": 1053,
-  "unchanged_rules": 1026,
-  "modified_rules": 1,
+  "source": "yzfh-ty/Shadowrocket-Rules",
+  "source_config_sha256": "20faf0d0f8452ae272e6f67c7fb0f8b29b74a2ebe402e537e46e0d80b08a448e",
+  "source_files_sha256": {
+    "Mail.list": "7e2096e5314583990cb7052acdfe6572747fc586c9f05d5144e76ec011f10c2e",
+    "Google.list": "b4a272c15a054353873817785367379bbaa1359efd276aa82a16186f29e5d493",
+    "AI.list": "b5d220a638754e62dbf505981fa9056ff2f637de722b790b66b16775de54095f",
+    "HSBC_HK.list": "ccc5e1e55ace2d7f10947caaee3e3ebbd82523134c46cafee70551fe09760d9b",
+    "HK_Banks_Direct.list": "1fbf5d9263bea4f2fcbfccb64abfdfad97b1760e1163c2dbea0b13d972412d64",
+    "HK_Broker.list": "d5379a7c9ee24b4188b06190989a17472414a3c4742f1c039af045c3d2c6a07f",
+    "ApplePush.list": "1d465b295582829cea2b06e87b7e2a2ea364ddcc395dfdcbfe65e5101c9e6923",
+    "Apple.list": "1f97fb736f3e561aa897eb14868e5d38da17ed8ea881f4033a6420dff6985fd1"
+  },
+  "source_rules": 1051,
+  "unchanged_rules": 1024,
   "omitted_rules": 26,
+  "modified_rules": 1,
   "source_types": {
     "DOMAIN": 68,
+    "DOMAIN-SUFFIX": 855,
     "DOMAIN-KEYWORD": 18,
-    "DOMAIN-SUFFIX": 857,
+    "USER-AGENT": 26,
     "IP-CIDR": 83,
-    "URL-REGEX": 1,
-    "USER-AGENT": 26
+    "URL-REGEX": 1
   },
   "changes": [
     {
       "file": "Google.list",
-      "line": "732",
+      "line": 708,
       "source": "USER-AGENT,%E4%BA%91%E7%AB%AF%E7%A1%AC%E7%9B%98*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Google.list",
-      "line": "733",
+      "line": 709,
       "source": "USER-AGENT,*com.google.Drive*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Google.list",
-      "line": "734",
+      "line": 710,
       "source": "USER-AGENT,Google.Drive*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "HK_Banks_Direct.list",
-      "line": "5",
+      "line": 5,
       "source": "URL-REGEX,^https?://www\\.sc\\.com/hk/",
       "output": "DOMAIN,www.sc.com",
       "action": "broadened to host match: Mihomo cannot route by URL path"
     },
     {
       "file": "Apple.list",
-      "line": "30",
+      "line": 34,
       "source": "USER-AGENT,*FindMyiPhone?",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "31",
+      "line": 35,
       "source": "USER-AGENT,*Music?",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "32",
+      "line": 36,
       "source": "USER-AGENT,*WeatherFoundation*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "33",
+      "line": 37,
       "source": "USER-AGENT,*com.apple.Maps?",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "34",
+      "line": 38,
       "source": "USER-AGENT,*com.apple.mobileme.fmip1",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "35",
+      "line": 39,
       "source": "USER-AGENT,FMDClient*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "36",
+      "line": 40,
       "source": "USER-AGENT,FMFD*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "37",
+      "line": 41,
       "source": "USER-AGENT,FindMyFriends*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "38",
+      "line": 42,
       "source": "USER-AGENT,FindMyiPhone*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "39",
+      "line": 43,
       "source": "USER-AGENT,Maps*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "40",
+      "line": 44,
       "source": "USER-AGENT,Wallet*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "41",
+      "line": 45,
       "source": "USER-AGENT,com.apple.Maps",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "42",
+      "line": 46,
       "source": "USER-AGENT,com.apple.appstored*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "43",
+      "line": 47,
       "source": "USER-AGENT,fmflocatord*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "44",
+      "line": 48,
       "source": "USER-AGENT,geod*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "45",
+      "line": 49,
       "source": "USER-AGENT,locationd*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "46",
+      "line": 50,
       "source": "USER-AGENT,passd*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "47",
+      "line": 51,
       "source": "USER-AGENT,Music*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "48",
+      "line": 52,
       "source": "USER-AGENT,AppleNews*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "49",
+      "line": 53,
       "source": "USER-AGENT,com.apple.news*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "50",
+      "line": 54,
       "source": "USER-AGENT,com.apple.trustd*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "51",
+      "line": 55,
       "source": "USER-AGENT,AppleTV*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     },
     {
       "file": "Apple.list",
-      "line": "52",
+      "line": 56,
       "source": "USER-AGENT,com.apple.tv*",
       "action": "omitted: Mihomo has no USER-AGENT routing rule"
     }
   ],
   "config_level_changes": [
-    "PROTOCOL,TCP was translated to NETWORK,TCP.",
-    "FINAL was translated to MATCH.",
-    "Shadowrocket DOMAIN-SET/RULE-SET URLs use Clash-native providers.",
-    "Host server:system entries are represented by fake-ip-filter/direct-nameserver.",
+    "All 13 source groups retain their choices and defaults; PROXY is a separate subscription selector, also available directly in 节点选择.",
+    "All source routing rules retain their order; PROTOCOL becomes NETWORK, FINAL becomes MATCH, and source providers map to Mihomo providers.",
+    "All eight owned rulesets are converted locally and served from yzfh-ty/Clash-Rules.",
+    "The existing dm.wo.com.cn rejection and Xiaohongshu DNS policy are retained.",
+    "APNs TCP 5223 remains restricted to Apple IPv4 and four APNs IPv6 ranges; IPv6 remains disabled by default.",
+    "Direct DNS uses system; Host server:system suffixes use nameserver-policy and fake-ip-filter.",
+    "Cloudflare and Google DoH use PROXY concurrently; this is not Shadowrocket's sequential fallback behavior.",
+    "TUN excludes all source IP ranges; dns-hijack retains the Clash setting for all UDP/TCP port 53 traffic.",
+    "Shadowrocket skip-proxy and bypass-system are not fully equivalent to Mihomo TUN exclusions and routing rules; client/system-proxy bypass lists may require separate setup.",
     "URL Rewrite and MITM are omitted; Mihomo routing has no equivalent redirect feature.",
-    "block-quic has no direct one-line equivalent and is not enabled in this first conversion."
+    "block-quic=all-proxy and udp-policy-not-supported-behaviour=REJECT have no exact equivalent in this conversion and are not reproduced."
   ]
 }

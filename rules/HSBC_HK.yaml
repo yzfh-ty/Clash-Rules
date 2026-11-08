@@ -1,0 +1,4 @@
+# Generated from HSBC_HK.list by scripts/sync-shadowrocket.py.
+payload:
+  - 'DOMAIN-SUFFIX,hsbc.com.hk'
+  - 'DOMAIN,mobile.eum-appdynamics.com'
