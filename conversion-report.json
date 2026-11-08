@@ -1,7 +1,7 @@
 {
   "target": "Mihomo (Clash.Meta)",
   "source": "yzfh-ty/Shadowrocket-Rules",
-  "source_config_sha256": "a6794b7c859d4c64ec700ec18569c91b0878c82404a2052db2e55be45d33b1e1",
+  "source_config_sha256": "4e4914cea0c5abad936585a7d3a19f06d6f90d7869cd74d48db3669f0327b519",
   "source_files_sha256": {
     "Mail.list": "7e2096e5314583990cb7052acdfe6572747fc586c9f05d5144e76ec011f10c2e",
     "Google.list": "b4a272c15a054353873817785367379bbaa1359efd276aa82a16186f29e5d493",
@@ -190,14 +190,14 @@
     }
   ],
   "config_level_changes": [
-    "All 15 source groups are converted; select groups retain their choices and defaults. PROXY is a separate subscription selector, also available through 手动选择.",
+    "All 14 source groups are converted. A Mihomo-only 手动选择 group lists subscription nodes directly; the main selector maps PROXY to 手动选择, while other PROXY references map to 节点选择 with duplicate choices removed.",
     "Source url-test groups test subscription nodes; timeout seconds become milliseconds, and lazy=false enables periodic checks even when idle.",
     "All source routing rules retain their order; PROTOCOL becomes NETWORK, FINAL becomes MATCH, and source providers map to Mihomo providers.",
     "All eight owned rulesets are converted locally and served from yzfh-ty/Clash-Rules.",
     "The existing dm.wo.com.cn rejection and Xiaohongshu DNS policy are retained.",
     "APNs TCP 5223 remains restricted to Apple IPv4 and four APNs IPv6 ranges; IPv6 remains disabled by default.",
     "Direct DNS uses system; Host server:system suffixes use nameserver-policy and fake-ip-filter.",
-    "Cloudflare and Google DoH use PROXY concurrently; this is not Shadowrocket's sequential fallback behavior.",
+    "Cloudflare and Google DoH follow 节点选择 concurrently; this is not Shadowrocket's sequential fallback behavior.",
     "TUN excludes all source IP ranges; dns-hijack retains the Clash setting for all UDP/TCP port 53 traffic.",
     "Shadowrocket skip-proxy and bypass-system are not fully equivalent to Mihomo TUN exclusions and routing rules; client/system-proxy bypass lists may require separate setup.",
     "URL Rewrite and MITM are omitted; Mihomo routing has no equivalent redirect feature.",

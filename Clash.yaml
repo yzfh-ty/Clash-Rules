@@ -51,8 +51,8 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
   nameserver:
-    - 'https://cloudflare-dns.com/dns-query#PROXY'
-    - 'https://dns.google/dns-query#PROXY'
+    - 'https://cloudflare-dns.com/dns-query#🚀 节点选择'
+    - 'https://dns.google/dns-query#🚀 节点选择'
   nameserver-policy:
     '+.local': [system]
     '+.in-addr.arpa': [system]
@@ -100,12 +100,7 @@ proxy-providers:
       interval: 600
       timeout: 5000
 
-# PROXY models Shadowrocket's current proxy independently of 节点选择.
 proxy-groups:
-- name: PROXY
-  type: select
-  use:
-  - subscription
 - name: 🚀 节点选择
   type: select
   proxies:
@@ -115,8 +110,6 @@ proxy-groups:
   - REJECT
 - name: ✋ 手动选择
   type: select
-  proxies:
-  - PROXY
   use:
   - subscription
 - name: ⚡ 自动选择
@@ -140,13 +133,11 @@ proxy-groups:
   proxies:
   - REJECT
   - 🚀 节点选择
-  - PROXY
   - DIRECT
 - name: 🤖 AI 服务
   type: select
   proxies:
   - 🚀 节点选择
-  - PROXY
   - DIRECT
   - REJECT
 - name: 🍏 苹果服务
@@ -154,13 +145,11 @@ proxy-groups:
   proxies:
   - DIRECT
   - 🚀 节点选择
-  - PROXY
   - REJECT
 - name: 🍎 苹果推送
   type: select
   proxies:
   - 🚀 节点选择
-  - PROXY
   - DIRECT
   - REJECT
 - name: 🏦 汇丰香港
@@ -168,21 +157,18 @@ proxy-groups:
   proxies:
   - DIRECT
   - 🚀 节点选择
-  - PROXY
   - REJECT
 - name: 🏦 香港银行
   type: select
   proxies:
   - DIRECT
   - 🚀 节点选择
-  - PROXY
   - REJECT
 - name: 📈 券商服务
   type: select
   proxies:
   - 🚀 节点选择
   - DIRECT
-  - PROXY
   - REJECT
 - name: 🏠 私有网络
   type: select
@@ -199,7 +185,6 @@ proxy-groups:
 - name: 🌍 非中国
   type: select
   proxies:
-  - PROXY
   - 🚀 节点选择
   - ⚡ 自动选择
   - DIRECT
@@ -207,7 +192,6 @@ proxy-groups:
 - name: 🐟 漏网之鱼
   type: select
   proxies:
-  - PROXY
   - 🚀 节点选择
   - ⚡ 自动选择
   - DIRECT

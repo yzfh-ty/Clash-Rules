@@ -25,7 +25,7 @@ for raw in source_text.splitlines():
     elif line and not line.startswith("#") and section:
         sections[section].append(line)
 
-groups = [{"name": "PROXY", "type": "select", "use": ["subscription"]}]
+groups = []
 for line in sections["Proxy Group"]:
     name, options = line.split(" = ", 1)
     options = options.split(",")
@@ -50,10 +50,22 @@ for line in sections["Proxy Group"]:
     selected = next((o.split("=", 1)[1] for o in options if o.startswith("policy-select-name=")), choices[0])
     choices.remove(selected)
     choices.insert(0, selected)
-    group = {"name": name, "type": options[0], "proxies": choices}
+    # A manual selector must contain nodes directly, never its parent selector.
+    if name == "✋ 手动选择":
+        choices = [choice for choice in choices if choice != "PROXY"]
+    else:
+        proxy_target = "✋ 手动选择" if name == "🚀 节点选择" else "🚀 节点选择"
+        choices = list(dict.fromkeys(proxy_target if choice == "PROXY" else choice for choice in choices))
+    group = {"name": name, "type": options[0]}
+    if choices:
+        group["proxies"] = choices
     if name == "✋ 手动选择":
         group["use"] = ["subscription"]
     groups.append(group)
+
+if not any(group["name"] == "✋ 手动选择" for group in groups):
+    selector_index = next(index for index, group in enumerate(groups) if group["name"] == "🚀 节点选择")
+    groups.insert(selector_index + 1, {"name": "✋ 手动选择", "type": "select", "use": ["subscription"]})
 
 owned = ["Mail", "Google", "AI", "HSBC_HK", "HK_Banks_Direct", "HK_Broker", "ApplePush", "Apple"]
 changes = []
@@ -110,6 +122,11 @@ for line in sections["Rule"]:
     line = line.replace("(PROTOCOL,", "(NETWORK,")
     if line.startswith("FINAL,"):
         line = "MATCH," + line.split(",", 1)[1]
+    fields = line.split(",")
+    policy_index = -2 if fields[-1] == "no-resolve" else -1
+    if fields[policy_index] == "PROXY":
+        fields[policy_index] = "🚀 节点选择"
+        line = ",".join(fields)
     rules.append(line)
 # Preserve the existing Clash-specific upstream fix before domestic fallbacks.
 if "DOMAIN,dm.wo.com.cn,REJECT" not in rules:
@@ -117,7 +134,7 @@ if "DOMAIN,dm.wo.com.cn,REJECT" not in rules:
 
 prefix = original.split("proxy-groups:\n", 1)[0]
 prefix = prefix.replace("# PROXY models Shadowrocket's current proxy independently of 节点选择.\n", "")
-prefix = prefix.replace("#🚀 节点选择", "#PROXY")
+prefix = prefix.replace("#PROXY", "#🚀 节点选择")
 if "    - 255.255.255.255/32" not in prefix:
     prefix = prefix.replace("    - 224.0.0.0/4\n", "    - 224.0.0.0/4\n    - 255.255.255.255/32\n    - 239.255.255.250/32\n")
 prefix = prefix.replace("  direct-nameserver:\n    - 223.5.5.5\n    - 119.29.29.29\n", "  direct-nameserver:\n    - system\n")
@@ -126,7 +143,7 @@ if "    '+.local': [system]" not in prefix:
 if "    - 'qpic.cn'" not in prefix:
     prefix = prefix.replace("    - '*.qpic.cn'", "    - 'qpic.cn'\n    - '*.qpic.cn'")
     prefix = prefix.replace("    - '*.qlogo.cn'", "    - 'qlogo.cn'\n    - '*.qlogo.cn'")
-output = prefix + "# PROXY models Shadowrocket's current proxy independently of 节点选择.\n"
+output = prefix
 output += yaml.safe_dump({"proxy-groups": groups, "rule-providers": config["rule-providers"], "rules": rules}, allow_unicode=True, sort_keys=False, width=200)
 config_path.write_text(output, encoding="utf-8", newline="\n")
 
@@ -140,14 +157,14 @@ report = {
     "source_types": dict(source_types),
     "changes": changes,
     "config_level_changes": [
-        f"All {len(groups) - 1} source groups are converted; select groups retain their choices and defaults. PROXY is a separate subscription selector, also available through 手动选择.",
+        f"All {len(sections['Proxy Group'])} source groups are converted. A Mihomo-only 手动选择 group lists subscription nodes directly; the main selector maps PROXY to 手动选择, while other PROXY references map to 节点选择 with duplicate choices removed.",
         "Source url-test groups test subscription nodes; timeout seconds become milliseconds, and lazy=false enables periodic checks even when idle.",
         "All source routing rules retain their order; PROTOCOL becomes NETWORK, FINAL becomes MATCH, and source providers map to Mihomo providers.",
         "All eight owned rulesets are converted locally and served from yzfh-ty/Clash-Rules.",
         "The existing dm.wo.com.cn rejection and Xiaohongshu DNS policy are retained.",
         "APNs TCP 5223 remains restricted to Apple IPv4 and four APNs IPv6 ranges; IPv6 remains disabled by default.",
         "Direct DNS uses system; Host server:system suffixes use nameserver-policy and fake-ip-filter.",
-        "Cloudflare and Google DoH use PROXY concurrently; this is not Shadowrocket's sequential fallback behavior.",
+        "Cloudflare and Google DoH follow 节点选择 concurrently; this is not Shadowrocket's sequential fallback behavior.",
         "TUN excludes all source IP ranges; dns-hijack retains the Clash setting for all UDP/TCP port 53 traffic.",
         "Shadowrocket skip-proxy and bypass-system are not fully equivalent to Mihomo TUN exclusions and routing rules; client/system-proxy bypass lists may require separate setup.",
         "URL Rewrite and MITM are omitted; Mihomo routing has no equivalent redirect feature.",
